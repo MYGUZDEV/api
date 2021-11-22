@@ -1,13 +1,13 @@
 {
-  "name": "myApp",
+  "name": "api_pablo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "primer api ejercicio 22-11",
+  "main": "app.js",
   "scripts": {
     "test": "nodemon src/app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "pablo",
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.5",
@@ -19,5 +19,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PABLOTREK/api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PABLOTREK/api/issues"
+  },
+  "homepage": "https://github.com/PABLOTREK/api#readme"
 }

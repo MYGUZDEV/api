@@ -17,9 +17,17 @@ const moviesController = {
             include: ['genre']
         })
             .then(movies => {
-                res.render('moviesList.ejs', {movies})
+                res.status(200).json ({
+                    meta:{
+                        status:200,
+                        total: movies.length,
+                        url: 'api/movies'
+                    } ,
+                    data:movies
             })
+        })
     },
+
     'detail': (req, res) => {
         db.Movie.findByPk(req.params.id,
             {
@@ -65,7 +73,8 @@ const moviesController = {
             return res.render(path.resolve(__dirname, '..', 'views',  'moviesAdd'), {allGenres,allActors})})
         .catch(error => res.send(error))
     },
-    create: function (req,res) {
+    create: function (req,res) { 
+        return res.send(req.body)
         Movies
         .create(
             {
@@ -77,9 +86,18 @@ const moviesController = {
                 genre_id: req.body.genre_id
             }
         )
-        .then(()=> {
-            return res.redirect('/movies')})            
-        .catch(error => res.send(error))
+        .then( movies => {
+            return res.status(200).json({
+                meta:{
+                    status:200,
+                    total: movies.length,
+                    url: 'api/movies'
+                } ,
+                data:movies                                                                                
+                
+            })}) 
+                       
+            .catch(error => res.send(error))
     },
     edit: function(req,res) {
         let movieId = req.params.id;
@@ -124,8 +142,17 @@ const moviesController = {
         let movieId = req.params.id;
         Movies
         .destroy({where: {id: movieId}, force: true}) // force: true es para asegurar que se ejecute la acción
-        .then(()=>{
-            return res.redirect('/movies')})
+        .then(movies => {
+           return res.status(200).json ({
+                meta:{
+                    status:200,
+                    total: movies.length,
+                    url: 'api/movies'
+                } ,
+                data:movies
+                
+            })
+        })
         .catch(error => res.send(error)) 
     }
 }

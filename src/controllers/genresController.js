@@ -5,8 +5,16 @@ const sequelize = db.sequelize;
 const genresController = {
     'list': (req, res) => {
         db.Genre.findAll()
-            .then(genres => {
-                res.render('genresList.ejs', {genres})
+            .then(genresss => {
+                return res.status(200).json ({
+                    meta:{
+                        status:200,
+                        total: genresss.length,
+                        url: 'api/genres'
+                    } ,
+                    data:genresss
+                    
+                })
             })
     },
     'detail': (req, res) => {
